@@ -16,3 +16,13 @@
 .task-item button {
   margin-left: 5px;
 }
+
+.done-button{
+  background-color: red;
+  color: white;
+}
+
+.undo-button{
+  background-color: green;
+  color: white;
+}

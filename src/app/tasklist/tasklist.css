@@ -18,3 +18,14 @@
 .task-list {
   margin-top: 20px;
 }
+
+.success-banner{
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
