@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Task Manager</h1>
+
+  <div class="add-task">
+    <input [(ngModel)]="newTask" placeholder="Add a new task" />
+    <button (click)="addTask()">Add Task</button>
+  </div>
+
+  <div class="task-list">
+    <app-taskitem
+      *ngFor="let task of tasks; let i = index"
+      [task]="task"
+      (delete)="deleteTask(i)"
+      (markDone)="markAsDone(i)"
+    ></app-taskitem>
+  </div>
+</div>

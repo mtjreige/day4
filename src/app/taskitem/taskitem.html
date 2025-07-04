@@ -1,0 +1,7 @@
+<div class="task-item" [ngClass]="{ 'completed': task.done }">
+  <span>{{ task.name }}</span>
+  <button (click)="onMarkDone()">
+    {{ task.done ? 'Undo' : 'Done' }}
+  </button>
+  <button (click)="onDelete()">Delete</button>
+</div>
