@@ -7,16 +7,17 @@
   </div>
 
   <div class="task-list">
-    <app-taskitem
-      *ngFor="let task of tasks; let i = index"
-      [task]="task"
-      (delete)="confirmDeleteTask(i)"
-      (markDone)="markAsDone(i)"
-    ></app-taskitem>
-  </div>
+  <app-taskitem
+    *ngFor="let task of tasks; let i = index"
+    [task]="task"
+    (delete)="confirmDeleteTask(i)"  
+    (markDone)="markAsDone(i)"
+  ></app-taskitem>
 </div>
 
-<!-- Modal Template -->
+</div>
+
+
 <ng-template #confirmModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Confirm Delete</h4>
@@ -31,6 +32,9 @@
   </div>
 </ng-template>
 
-<div *ngIf="showSuccess" class="success-banner">
-  {{successMessage}}
+
+<div *ngFor="let task of tasks; let i = index">
+  <a [routerLink]="['/tasks', i]">{{ task.name}}</a>
+  <button (click)="markAsDone(i)">{{ task.done ? 'Undo' : 'Done'}}</button>
+  <button (click)="deleteTask(i)">Delete</button>
 </div>

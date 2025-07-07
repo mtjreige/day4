@@ -3,27 +3,118 @@
   margin: auto;
   padding: 20px;
   text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .add-task input {
-  padding: 5px;
-  width: 60%;
+  padding: 8px;
+  width: 65%;
   margin-right: 10px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.add-task input:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 .add-task button {
-  padding: 5px 10px;
+  padding: 8px 14px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-task button:hover {
+  background-color: #0056b3;
 }
 
 .task-list {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.success-banner{
+.task-item {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+.task-item.completed {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  text-decoration: line-through;
+}
+
+.task-item span {
+  flex-grow: 1;
+  font-size: 18px;
+  user-select: none;
+  text-align: left;
+}
+
+.task-item button {
+  margin-left: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.task-item button.done-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.task-item button.done-button:hover {
+  background-color: #218838;
+}
+
+.task-item button.undo-button {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.task-item button.undo-button:hover {
+  background-color: #e0a800;
+}
+
+.task-item button.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.task-item button.delete-button:hover {
+  background-color: #c82333;
+}
+
+.success-banner {
   width: 100%;
   background-color: #28a745;
   color: white;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 15px;
   border-radius: 5px;
   text-align: center;

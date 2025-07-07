@@ -1,18 +1,22 @@
 import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskItemComponent } from '../taskitem/taskitem';
+import { TaskService } from '../taskservice';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tasklist',
   standalone: true,
-  imports: [CommonModule, FormsModule, TaskItemComponent, NgbModule],
+  imports: [CommonModule, FormsModule, TaskItemComponent, NgbModule, RouterModule],
   templateUrl: './tasklist.html',
   styleUrls: ['./tasklist.css']
 })
 export class TaskListComponent {
   newTask: string = '';
+
+  
   tasks: { name: string; done: boolean }[] = [];
 
   selectedTaskName: string = '';
@@ -20,16 +24,23 @@ export class TaskListComponent {
 
   @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
 
-  constructor(private modalService: NgbModal) {}
+  successMessage: string = '';
+  showSuccess: boolean = false;
+
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {
+    this.tasks = this.taskService.getTasks(); 
+  }
 
   addTask() {
     if (this.newTask.trim() !== '') {
-      this.tasks.push({ name: this.newTask, done: false });
+      this.taskService.addTask(this.newTask.trim());
       this.newTask = '';
     }
   }
-  successMessage: string = '';
-  showSuccess: boolean = false;
 
   confirmDeleteTask(index: number) {
     this.selectedTaskName = this.tasks[index].name;
@@ -43,16 +54,16 @@ export class TaskListComponent {
         }
       },
       () => {
-        // Modal dismissed without action
+        
       }
     );
   }
 
   deleteTask(index: number) {
     const deletedTask = this.tasks[index].name;
-    this.tasks.splice(index, 1);
+    this.taskService.deleteTask(index);
 
-    this.successMessage = `you have successfuky deleted ${deletedTask}`;
+    this.successMessage = `You have successfully deleted ${deletedTask}`;
     this.showSuccess = true;
 
     setTimeout(() => {
@@ -61,6 +72,10 @@ export class TaskListComponent {
   }
 
   markAsDone(index: number) {
-    this.tasks[index].done = !this.tasks[index].done;
+    this.taskService.toggleDone(index);
+  }
+
+  goToDetails(index: number) {
+    this.router.navigate(['/tasks', index]);
   }
 }
