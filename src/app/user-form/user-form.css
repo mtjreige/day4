@@ -1,0 +1,12 @@
+input {
+    display: block;
+    margin-bottom: 6px;
+}
+small {
+    color: red;
+    display: block;
+    margin-bottom: 6px;
+}
+button {
+    margin-top: 10px;
+}
