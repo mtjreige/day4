@@ -1,0 +1,42 @@
+<form [formGroup]="userForm" (ngSubmit)="onsubmit()">
+
+  <label>Full Name:</label>
+  <input type="text" formControlName="fullName">
+  <div *ngIf="f['fullName'].invalid && f['fullName'].touched">
+    <small *ngIf="f['fullName'].errors?.['required']">Full Name is required</small>
+    <small *ngIf="f['fullName'].errors?.['minlength']">Minimum 3 characters</small>
+  </div>
+
+  <label>Email:</label>
+  <input type="email" formControlName="email">
+  <div *ngIf="f['email'].invalid && f['email'].touched">
+    <small *ngIf="f['email'].errors?.['required']">Email is required</small>
+    <small *ngIf="f['email'].errors?.['email']">Invalid email format</small>
+  </div>
+
+  <label>Age:</label>
+  <input type="number" formControlName="age">
+  <div *ngIf="f['age'].invalid && f['age'].touched">
+    <small *ngIf="f['age'].errors?.['required']">Age is required</small>
+    <small *ngIf="f['age'].errors?.['min']">Must be at least 18</small>
+    <small *ngIf="f['age'].errors?.['max']">Must be 100 or less</small>
+  </div>
+
+  <label>Password:</label>
+  <input type="password" formControlName="password">
+  <div *ngIf="f['password'].invalid && f['password'].touched">
+    <small *ngIf="f['password'].errors?.['required']">Password is required</small>
+    <small *ngIf="f['password'].errors?.['minlength']">Min length is 6</small>
+    <small *ngIf="f['password'].errors?.['maxlength']">Max length is 20</small>
+  </div>
+
+  <label>Confirm Password:</label>
+  <input type="password" formControlName="confirmPassword">
+  <div *ngIf="(f['confirmPassword'].touched && f['confirmPassword'].invalid) || userForm.errors?.['mismatch']">
+    <small *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password is required</small>
+    <small *ngIf="userForm.errors?.['mismatch']">Passwords do not match</small>
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+
+</form>
